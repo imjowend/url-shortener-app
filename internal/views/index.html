@@ -20,7 +20,15 @@
                         body: `url=${encodeURIComponent(url)}`
                     });
 
-                    resultDiv.innerHTML = await response.text();
+                    // Insert HTML response and execute script
+                    const htmlContent = await response.text();
+                    resultDiv.innerHTML = htmlContent;
+
+                    // Manually execute script
+                    const script = resultDiv.querySelector('script');
+                    if (script){
+                        eval(script.innerText);
+                    }
                 });
             }
         });
